@@ -316,9 +316,8 @@
                         data-ui="add-section"
                         aria-label="Add Education"
                         class="button--2de5X button--32xRL secondary--2ySVn"
-                        :disabled="!showEdu"
+                        v-if="showEdu"
                         @click="showEducation"
-                        :aria-disabled="!showEdu"
                       >
                         + Add
                       </button>
@@ -365,6 +364,7 @@
                                       type="text"
                                       class="styles--2e9Cp"
                                       value=""
+                                      v-model="user.education[index].school"
                                     />
                                   </div>
                                 </div>
@@ -398,6 +398,7 @@
                                       type="text"
                                       class="styles--2e9Cp"
                                       value=""
+                                      v-model="user.education[index].fieldOfStudy"
                                     />
                                   </div>
                                 </div>
@@ -431,6 +432,7 @@
                                       type="text"
                                       class="styles--2e9Cp"
                                       value=""
+                                      v-model="user.education[index].degree"
                                     />
                                   </div>
                                 </div>
@@ -483,6 +485,7 @@
                                           data-hj-whitelist="true"
                                           type="text"
                                           class="styles--2e9Cp"
+                                          v-model="user.education[index].startDate"
                                         >
                                           <option value="" hidden="">
                                             From
@@ -624,6 +627,7 @@
                                           data-hj-whitelist="true"
                                           type="text"
                                           class="styles--2e9Cp"
+                                          v-model="user.education[index].endDate"
                                         >
                                           <option value="" hidden="">To</option>
                                           <option role="option">2029</option>
@@ -1315,11 +1319,19 @@ export default {
     Icon
   },
   data() {
+    var educationInterface = {
+      school: '',
+      fieldOfStudy: '',
+      degree: '',
+      startDate: '',
+      endDate: ''
+    }
     return {
-      user: {},
+      user: {education:[educationInterface]},
       showEdu: true,
       showExp: true,
       aryEducation: [],
+      
     };
   },
   methods: {
@@ -1333,6 +1345,7 @@ export default {
           this.user.lastname = "";
           this.user.email = "";
           this.user.address = "";
+          this.user.education = [];
         })
         .catch((error) => {
           console.log(error);
@@ -1347,6 +1360,7 @@ export default {
     },
     increaseEducation(e) {
       e.preventDefault;
+      this.user.education.push([])
       this.aryEducation.push(this.aryEducation.length);
     },
     removeEducation(e, i) {
