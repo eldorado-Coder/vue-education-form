@@ -1340,12 +1340,20 @@ export default {
       db.collection("users")
         .add(this.user)
         .then(() => {
-          alert("User successfully created!");
           this.user.firstname = "";
           this.user.lastname = "";
           this.user.email = "";
           this.user.address = "";
+          var educationInterface = {
+            school: '',
+            fieldOfStudy: '',
+            degree: '',
+            startDate: '',
+            endDate: ''
+          }
           this.user.education = [educationInterface];
+          this.aryEducation = []
+          alert("User successfully created!");
         })
         .catch((error) => {
           console.log(error);
