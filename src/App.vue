@@ -1314,18 +1314,18 @@
 import { db } from "@/firebase.js";
 import { Icon } from '@iconify/vue2';
 
+var educationInterface = {
+  school: '',
+  fieldOfStudy: '',
+  degree: '',
+  startDate: '',
+  endDate: ''
+}
 export default {
   components: {
     Icon
   },
   data() {
-    var educationInterface = {
-      school: '',
-      fieldOfStudy: '',
-      degree: '',
-      startDate: '',
-      endDate: ''
-    }
     return {
       user: {education:[educationInterface]},
       showEdu: true,
@@ -1345,7 +1345,7 @@ export default {
           this.user.lastname = "";
           this.user.email = "";
           this.user.address = "";
-          this.user.education = [];
+          this.user.education = [educationInterface];
         })
         .catch((error) => {
           console.log(error);
@@ -1360,7 +1360,14 @@ export default {
     },
     increaseEducation(e) {
       e.preventDefault;
-      this.user.education.push([])
+      var educationInterface = {
+        school: '',
+        fieldOfStudy: '',
+        degree: '',
+        startDate: '',
+        endDate: ''
+      }
+      this.user.education.push(educationInterface)
       this.aryEducation.push(this.aryEducation.length);
     },
     removeEducation(e, i) {
